@@ -1,41 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample HTML Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celluloid - Python Animation</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      width: 250px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      transform: translateX(-100%);
+      animation: slideIn 0.5s forwards;
+    }
+
+    .sidebar h2 {
+      color: white;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin: 15px 0;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .sidebar ul li a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(10px);
+    }
+
+    /* Main Content Styles */
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      background: white;
+      border-radius: 20px 0 0 20px;
+      margin-left: -20px;
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-content h1 {
+      color: #1e3c72;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .main-content p {
+      color: #555;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .main-content ol {
+      padding-left: 20px;
+    }
+
+    .main-content ol li {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .main-content ol li strong {
+      color: #1e3c72;
+    }
+
+    /* Card Styles for Sections */
+    section {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animation for Sidebar */
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        transform: translateY(-100%);
+        animation: slideDown 0.5s forwards;
+      }
+
+      .main-content {
+        margin-left: 0;
+        border-radius: 0;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
         }
-        h1 {
-            color: #007bff;
+        to {
+          transform: translateY(0);
         }
-        p {
-            font-size: 18px;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #007bff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="#intro">Intro</a></li>
+        <li><a href="#key-features">Key Features</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </div>
 
-    <h1>Welcome to My Sample HTML Page</h1>
-    <p>This is a simple webpage created using HTML and CSS.</p>
-    
-    <a href="https://www.example.com" class="button">Learn More</a>
+    <!-- Main Content -->
+    <div class="main-content">
+      <section id="intro">
+        <h1>Intro</h1>
+        <p>
+          A lightweight Python package called Celluloid makes it easy and quick to animate Matplotlib charts. With just a few lines of code, users may create fluid animations with Celluloid, in contrast to Matplotlib's built-in animation module, which requires sophisticated programming. It is perfect for viewing dynamic data because it captures frames with ease. We'll go over how to install it, its main characteristics, and useful applications in this blog.
+        </p>
+      </section>
 
+      <section id="key-features">
+        <h1>Key Features of Celluloid</h1>
+        <ol>
+          <li><strong>Simple and Easy to Use</strong> – Requires minimal code to animate Matplotlib plots compared to the built-in FuncAnimation module.</li>
+          <li><strong>Seamless Integration with Matplotlib</strong> – Works directly with Matplotlib, making it easy to convert static plots into animations.</li>
+          <li><strong>Frame-by-Frame Recording</strong> – Captures each frame with a single function call (camera.snap()), eliminating complex looping structures.</li>
+          <li><strong>Lightweight and Efficient</strong> – A small library that doesn’t add significant overhead to your project.</li>
+          <li><strong>Compatible with Various Outputs</strong> – Supports saving animations as GIFs, MP4s, or displaying them in Jupyter notebooks.</li>
+          <li><strong>No Extra Dependencies</strong> – Only requires Matplotlib, making it easy to install and use without additional packages.</li>
+        </ol>
+      </section>
+
+      <section id="conclusion">
+        <h1>Conclusion</h1>
+        <p>
+          Celluloid simplifies and streamlines animating Matplotlib plots, making the development of complex code unnecessary. Data visualizations are easily brought to life using minimal commands. From presentations, through research, to artistic projects, Celluloid is an effective tool for seamless animations in Python.
+        </p>
+      </section>
+    </div>
+  </div>
 </body>
 </html>
