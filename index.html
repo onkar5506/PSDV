@@ -221,121 +221,201 @@
         <li><a href="#intro">Intro</a></li>
         <li><a href="#key-features">Key Features</a></li>
         <li><a href="#install">Installation</a></li>
+        <li><a href="#examples">Examples</a></li>
+        <li><a href="#real">Real World Use Cases</a></li>
         <li><a href="#conclusion">Conclusion</a></li>
-        <li><a href="#code-execution">Try It Out</a></li>
+        <li><a href="#references">References and Further Readings</a></li>
       </ul>
     </div>
 
     <!-- Main Content -->
-    
     <div class="main-content">
       <h1>Celluloid: The Simplest Way to Animate Matplotlib Plots</h1>
+      
+      <!-- Intro Section -->
       <section id="intro">
         <h1>Intro</h1>
-        <p>
-          A lightweight Python package called Celluloid makes it easy and quick to animate Matplotlib charts. With just a few lines of code, users may create fluid animations with Celluloid, in contrast to Matplotlib's built-in animation module, which requires sophisticated programming. It is perfect for viewing dynamic data because it captures frames with ease. We'll go over how to install it, its main characteristics, and useful applications in this blog.
-        </p>
+        <p>A lightweight Python package called Celluloid makes it easy and quick to animate Matplotlib charts. With just a few lines of code, users may create fluid animations with Celluloid, in contrast to Matplotlib's built-in animation module, which requires sophisticated programming. It is perfect for viewing dynamic data because it captures frames with ease. We'll go over how to install it, its main characteristics, and useful applications in this blog.</p>
       </section>
 
+      <!-- Key Features Section -->
       <section id="key-features">
         <h1>Key Features of Celluloid</h1>
         <ol>
-          <li><strong>Simple and Easy to Use</strong> – Requires minimal code to animate Matplotlib plots compared to the built-in FuncAnimation module.</li>
-          <li><strong>Seamless Integration with Matplotlib</strong> – Works directly with Matplotlib, making it easy to convert static plots into animations.</li>
-          <li><strong>Frame-by-Frame Recording</strong> – Captures each frame with a single function call (camera.snap()), eliminating complex looping structures.</li>
-          <li><strong>Lightweight and Efficient</strong> – A small library that doesn’t add significant overhead to your project.</li>
-          <li><strong>Compatible with Various Outputs</strong> – Supports saving animations as GIFs, MP4s, or displaying them in Jupyter notebooks.</li>
-          <li><strong>No Extra Dependencies</strong> – Only requires Matplotlib, making it easy to install and use without additional packages.</li>
-        </ol>
+            <li><strong>Simple and Easy to Use</strong> – Requires minimal code to animate Matplotlib plots compared to the built-in FuncAnimation module.</li>
+            <li><strong>Seamless Integration with Matplotlib</strong> – Works directly with Matplotlib, making it easy to convert static plots into animations.</li>
+            <li><strong>Frame-by-Frame Recording</strong> – Captures each frame with a single function call (camera.snap()), eliminating complex looping structures.</li>
+            <li><strong>Lightweight and Efficient</strong> – A small library that doesn’t add significant overhead to your project.</li>
+            <li><strong>Compatible with Various Outputs</strong> – Supports saving animations as GIFs, MP4s, or displaying them in Jupyter notebooks.</li>
+            <li><strong>No Extra Dependencies</strong> – Only requires Matplotlib, making it easy to install and use without additional packages.</li>
+          </ol>
       </section>
 
-      <!-- Installation Guide -->
+      <!-- Installation Section -->
       <section id="install">
         <h1>Installation</h1>
         <p>Follow these steps to install and use Celluloid:</p>
-
-        <!-- Code Block 1 -->
         <div class="code-container">
           <pre><code id="code1"># Step 1: Install Celluloid
 pip install celluloid</code></pre>
-          <div class="code-buttons">
-            <button class="copy-button" onclick="copyCode('code1')">Copy</button>
-            <button class="run-button" onclick="runCode('code1')">Run</button>
-          </div>
-        </div>
-
-        <!-- Code Block 2 -->
-        <div class="code-container">
-          <pre><code id="code2"># Step 2: Create a matplotlib Figure and Camera
-from celluloid import Camera
-import matplotlib.pyplot as plt
-
-fig = plt.figure()
-camera = Camera(fig)</code></pre>
-          <div class="code-buttons">
-            <button class="copy-button" onclick="copyCode('code2')">Copy</button>
-            <button class="run-button" onclick="runCode('code2')">Run</button>
-          </div>
-        </div>
-
-        <!-- Code Block 3 -->
-        <div class="code-container">
-          <pre><code id="code3"># Step 3: Plot and capture frames
-plt.plot([0, 1, 2], [0, 1, 4])
-camera.snap()</code></pre>
-          <div class="code-buttons">
-            <button class="copy-button" onclick="copyCode('code3')">Copy</button>
-            <button class="run-button" onclick="runCode('code3')">Run</button>
-          </div>
-        </div>
-
-        <!-- Code Block 4 -->
-        <div class="code-container">
-          <pre><code id="code4"># Step 4: Create and save the animation
-animation = camera.animate()
-animation.save("animation.gif")</code></pre>
-          <div class="code-buttons">
-            <button class="copy-button" onclick="copyCode('code4')">Copy</button>
-            <button class="run-button" onclick="runCode('code4')">Run</button>
-          </div>
-        </div>
+          
       </section>
 
+      <!-- Examples Section -->
+      <section id="examples">
+        <h1>Examples</h1>
+        <p>Let us explore some of the features of Celluloid with some examples.</p>
+
+        <!-- Quadratic Example -->
+        <h2>Visualising a Quadratic Function</h2>
+        <div class="code-container">
+          <pre><code id="code1">
+import numpy as np
+import matplotlib.pyplot as plt
+from celluloid import Camera
+            
+# Create a figure and axis
+fig, ax = plt.subplots()
+            
+# Create a camera to take snapshots of the figure
+camera = Camera(fig)
+            
+# Define the x values
+x = np.linspace(-10, 10, 400)
+            
+# Define the range of 'a' values to animate
+a_values = np.linspace(-1, 1, 100)
+            
+# Loop through different 'a' values and plot the quadratic function
+for a in a_values:
+    y = a * x**2 + 2 * x + 1  # Quadratic function y = ax^2 + bx + c
+    ax.plot(x, y, label=f'a = {a:.2f}')
+    ax.set_xlim(-10, 10)
+    ax.set_ylim(-10, 10)
+    ax.legend(loc='upper right')
+    camera.snap()  # Take a snapshot for the animation
+            
+# Create the animation
+animation = camera.animate()
+plt.close(fig)
+            
+# Display the animation in the Colab notebook
+from IPython.display import HTML
+HTML(animation.to_html5_video())</code></pre>
+         
+        <video controls width="600">
+          <source src="quadratic_animation.mp4" type="video/mp4">
+        </video>
+
+        <!-- Sine Wave Example -->
+        <h2>Animating a Sine Wave</h2>
+        <div class="code-container">
+          <pre><code id="code3">
+import numpy as np
+import matplotlib.pyplot as plt
+from celluloid import Camera
+from IPython.display import HTML
+from IPython.display import Image
+import matplotlib.animation as animation
+# Set up the figure and camera
+fig, ax = plt.subplots()
+camera = Camera(fig)
+
+x = np.linspace(0, 4*np.pi, 100)  # X values
+for i in range(100):
+    y = np.sin(x + i * 0.1)  # Shift sine wave over time
+    ax.plot(x, y, 'b')  # Plot updated sine wave
+    camera.snap()  # Capture frame
+
+# Create animation
+animation = camera.animate(interval=50)  # Interval in milliseconds
+plt.close(fig)
+from IPython.display import HTML
+HTML(animation.to_jshtml())  # Displays interactive animation
+          </code></pre>
+          
+        
+        <video controls width="600">
+          <source src="sine_wave_animation.mp4" type="video/mp4">
+        </video>
+
+        <!-- Stock Price Example -->
+        <h2>Stock Price Animation</h2>
+        <div class="code-container">
+          <pre><code id="code3">
+import yfinance as yf
+import matplotlib.pyplot as plt
+from celluloid import Camera
+
+# Fetch stock data
+ticker = "AAPL"  # Example: Apple Inc.
+data = yf.download(ticker, start="2023-01-01", end="2023-10-01")
+dates = data.index
+prices = data['Close']
+
+# Set up the plot and camera
+fig, ax = plt.subplots(figsize=(10, 5))
+camera = Camera(fig)
+
+# Animate the stock price
+for i in range(len(dates)):
+    ax.plot(dates[:i+1], prices[:i+1], color='blue', lw=2)  # Plot up to the i-th point
+    ax.set_title(f'{ticker} Stock Price Animation')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Price (USD)')
+    ax.grid(True, linestyle='--', alpha=0.7)
+    camera.snap()  # Capture the frame
+
+# Create the animation
+animation = camera.animate(interval=50)
+
+# Display the animation
+from IPython.display import HTML
+HTML(animation.to_html5_video())
+          </code></pre>
+        
+          <video controls width="600">
+            <source src="stock_market.mp4" type="video/mp4">
+          </video>
+          
+      </section>
+
+      <!-- Key Features Section -->
+      <section id="#real">
+        <h1>Real World Use Cases</h1>
+        <ol>
+            <li><strong>Educational Visualizations</strong> – Helps students and educators animate mathematical functions, physics simulations, and algorithm demonstrations for better understanding.</li>
+            <li><strong>Stock Market & Financial Analysis</strong> – Used to animate trends in stock prices, market fluctuations, and financial data over time.
+            </li>
+            <li><strong>Climate & Weather Data Visualization</strong> – Useful for animating temperature changes, rainfall distribution, and climate patterns over different periods.
+            </li>
+            <li><strong>Medical & Healthcare Analytics</strong> – Can be used to animate patient data trends, ECG waveforms, or disease spread over time.
+</li>
+            <li><strong>Social Media & Marketing Analytics</strong> – Visualizes audience engagement, campaign performance, and trends dynamically.
+            </li>
+            <li><strong>Traffic & Navigation Data</strong> – Used for tracking vehicle movement, congestion trends, and route optimization analysis.
+            </li>
+          </ol>
+      </section>
+
+      <!-- Conclusion Section -->
       <section id="conclusion">
         <h1>Conclusion</h1>
-        <p>
-          Celluloid simplifies and streamlines animating Matplotlib plots, making the development of complex code unnecessary. Data visualizations are easily brought to life using minimal commands. From presentations, through research, to artistic projects, Celluloid is an effective tool for seamless animations in Python.
-        </p>
+        <p>Celluloid simplifies and streamlines animating Matplotlib plots, making the development of complex code unnecessary. Data visualizations are easily brought to life using minimal commands. From presentations, through research, to artistic projects, Celluloid is an effective tool for seamless animations in Python.</p>
       </section>
-
-      <!-- Code Execution Section -->
-      <section id="code-execution" class="code-execution">
-        <h2>Try It Out</h2>
-        <p>Run the following Python code to see Celluloid in action:</p>
-        <iframe id="replit-iframe" src="https://replit.com/@YourUsername/YourReplitProject?embed=true" width="100%" height="500px"></iframe>
+      <!-- Conclusion Section -->
+      <section id="references">
+        <h1>References & Further Reading</h1>
+        <ul>
+          <li><a href="https://github.com/jwkvam/celluloid">Official GitHub Repository</a></li>
+          <li><a href="https://matplotlib.org/stable/users/animation.html">Matplotlib Animation Documentation</a></li>
+        </ul>
       </section>
+        
     </div>
   </div>
+        
 
-  <script>
-    // Function to copy code to clipboard
-    function copyCode(id) {
-      const codeElement = document.getElementById(id);
-      const text = codeElement.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Code copied to clipboard!");
-      }).catch(() => {
-        alert("Failed to copy code.");
-      });
-    }
 
-    // Function to run code in Replit iframe
-    function runCode(id) {
-      const codeElement = document.getElementById(id);
-      const code = encodeURIComponent(codeElement.innerText);
-      const iframe = document.getElementById("replit-iframe");
-      iframe.src = `https://replit.com/@YourUsername/YourReplitProject?embed=true&code=${code}`;
-    }
-  </script>
 </body>
 </html>
