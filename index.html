@@ -10,7 +10,7 @@
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      background: #f0f0f0; /* Light gray background */
       color: #333;
       line-height: 1.6;
     }
@@ -23,8 +23,8 @@
     /* Sidebar Styles */
     .sidebar {
       width: 250px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
+      background: #4CAF50; /* Green background */
+      color: white;
       padding: 20px;
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
       transform: translateX(-100%);
@@ -32,7 +32,6 @@
     }
 
     .sidebar h2 {
-      color: white;
       text-align: center;
       margin-bottom: 20px;
       font-size: 24px;
@@ -74,7 +73,7 @@
     }
 
     .main-content h1 {
-      color: #1e3c72;
+      color: #4CAF50; /* Green heading */
       font-size: 36px;
       margin-bottom: 20px;
     }
@@ -96,7 +95,7 @@
     }
 
     .main-content ol li strong {
-      color: #1e3c72;
+      color: #4CAF50; /* Green for strong text */
     }
 
     /* Card Styles for Sections */
@@ -112,6 +111,66 @@
     section:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Code Block Styles */
+    .code-container {
+      position: relative;
+      background: #f9f9f9; /* Light gray background */
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+    }
+
+    pre {
+      margin: 0;
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .code-buttons {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .copy-button, .run-button {
+      background: #4CAF50; /* Green buttons */
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background 0.3s ease;
+    }
+
+    .copy-button:hover, .run-button:hover {
+      background: #45a049; /* Darker green on hover */
+    }
+
+    /* Code Execution Section */
+    .code-execution {
+      margin-top: 30px;
+    }
+
+    .code-execution h2 {
+      color: #4CAF50; /* Green heading */
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .code-execution iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     /* Animation for Sidebar */
@@ -161,7 +220,9 @@
       <ul>
         <li><a href="#intro">Intro</a></li>
         <li><a href="#key-features">Key Features</a></li>
+        <li><a href="#install">Installation</a></li>
         <li><a href="#conclusion">Conclusion</a></li>
+        <li><a href="#code-execution">Try It Out</a></li>
       </ul>
     </div>
 
@@ -186,13 +247,93 @@
         </ol>
       </section>
 
+      <!-- Installation Guide -->
+      <section id="install">
+        <h1>Installation</h1>
+        <p>Follow these steps to install and use Celluloid:</p>
+
+        <!-- Code Block 1 -->
+        <div class="code-container">
+          <pre><code id="code1"># Step 1: Install Celluloid
+pip install celluloid</code></pre>
+          <div class="code-buttons">
+            <button class="copy-button" onclick="copyCode('code1')">Copy</button>
+            <button class="run-button" onclick="runCode('code1')">Run</button>
+          </div>
+        </div>
+
+        <!-- Code Block 2 -->
+        <div class="code-container">
+          <pre><code id="code2"># Step 2: Create a matplotlib Figure and Camera
+from celluloid import Camera
+import matplotlib.pyplot as plt
+
+fig = plt.figure()
+camera = Camera(fig)</code></pre>
+          <div class="code-buttons">
+            <button class="copy-button" onclick="copyCode('code2')">Copy</button>
+            <button class="run-button" onclick="runCode('code2')">Run</button>
+          </div>
+        </div>
+
+        <!-- Code Block 3 -->
+        <div class="code-container">
+          <pre><code id="code3"># Step 3: Plot and capture frames
+plt.plot([0, 1, 2], [0, 1, 4])
+camera.snap()</code></pre>
+          <div class="code-buttons">
+            <button class="copy-button" onclick="copyCode('code3')">Copy</button>
+            <button class="run-button" onclick="runCode('code3')">Run</button>
+          </div>
+        </div>
+
+        <!-- Code Block 4 -->
+        <div class="code-container">
+          <pre><code id="code4"># Step 4: Create and save the animation
+animation = camera.animate()
+animation.save("animation.gif")</code></pre>
+          <div class="code-buttons">
+            <button class="copy-button" onclick="copyCode('code4')">Copy</button>
+            <button class="run-button" onclick="runCode('code4')">Run</button>
+          </div>
+        </div>
+      </section>
+
       <section id="conclusion">
         <h1>Conclusion</h1>
         <p>
           Celluloid simplifies and streamlines animating Matplotlib plots, making the development of complex code unnecessary. Data visualizations are easily brought to life using minimal commands. From presentations, through research, to artistic projects, Celluloid is an effective tool for seamless animations in Python.
         </p>
       </section>
+
+      <!-- Code Execution Section -->
+      <section id="code-execution" class="code-execution">
+        <h2>Try It Out</h2>
+        <p>Run the following Python code to see Celluloid in action:</p>
+        <iframe id="replit-iframe" src="https://replit.com/@YourUsername/YourReplitProject?embed=true" width="100%" height="500px"></iframe>
+      </section>
     </div>
   </div>
+
+  <script>
+    // Function to copy code to clipboard
+    function copyCode(id) {
+      const codeElement = document.getElementById(id);
+      const text = codeElement.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Code copied to clipboard!");
+      }).catch(() => {
+        alert("Failed to copy code.");
+      });
+    }
+
+    // Function to run code in Replit iframe
+    function runCode(id) {
+      const codeElement = document.getElementById(id);
+      const code = encodeURIComponent(codeElement.innerText);
+      const iframe = document.getElementById("replit-iframe");
+      iframe.src = `https://replit.com/@YourUsername/YourReplitProject?embed=true&code=${code}`;
+    }
+  </script>
 </body>
 </html>
